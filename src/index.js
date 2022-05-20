@@ -4,6 +4,7 @@ import './index.css';
 // import style from './Module.module.css';
 import App from './App';
 import About from './About';
+import Logo from './Logo';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
@@ -13,6 +14,7 @@ root.render(
     <Routes>
       <Route path='/' element={<App />} />
       <Route path='/about' element={<About />} />
+      <Route path='/logo' element={<Logo />} />
     </Routes>
   </BrowserRouter>
 );
