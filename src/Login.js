@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import { useState, useEffect } from 'react';
+import {clientId, buttonText, onSuccess, onFailure, cookiePolicy, GoogleLogin} from 'react-google-login';
 
 async function doLogin({email, password}){
     const response = await fetch('http://localhost:3001/api/v1/auth/login', {
@@ -26,6 +27,7 @@ function Login(){
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const token = localStorage.getItem('token');
+    console.log(token)
 
     useEffect(()=>{
         setIsLoggedIn(!!token);
@@ -48,9 +50,14 @@ function Login(){
         setIsLoading(false);
     }
 
+    const responseGoogle = response => {
+        console.log(response);
+    }
+
     return(
         <div className='App'>
             <header className='App-header'>
+                <img src={logo} className="App-logo" alt='logo' />
                 {!isLoggedIn ? (
                     <form onSubmit={handleSubmit}>
                         <input
@@ -66,6 +73,13 @@ function Login(){
                             value={password}
                         />
                         <input type="submit" value={isLoading ? "Loading" : "Login"} />
+                        <GoogleLogin 
+                        clientId="620062844379-tinvb1ulhbbkjrgu7f76q2chuemflqib.apps.googleusercontent.com"
+                        buttonText="Login with Google"
+                        onSuccess={responseGoogle}
+                        onFailure={responseGoogle}
+                        cookiePolicy="single_host_origin"
+                        />
                     </form>
                 ):(
                     <input type="submit" value="logout" onClick={handleLogout} />

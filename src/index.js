@@ -6,19 +6,26 @@ import App from './App';
 import About from './About';
 import Logo from './Logo';
 import Login from './Login';
+import Protected from './Protected';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <BrowserRouter>
-    <Routes>
-      <Route path='/' element={<App />} />
-      <Route path='/about' element={<About />} />
-      <Route path='/logo' element={<Logo />} />
-      <Route path='/login' element={<Login />} />
-    </Routes>
-  </BrowserRouter>
+  <React.StrictMode>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={
+          <Protected>
+            <App />
+          </Protected>
+        } />
+        <Route path='/about' element={<About />} />
+        <Route path='/logo' element={<Logo />} />
+        <Route path='/login' element={<Login />} />
+      </Routes>
+    </BrowserRouter>
+  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
